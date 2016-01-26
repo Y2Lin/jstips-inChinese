@@ -1,3 +1,5 @@
+# 转载翻译https://github.com/loverajoel/jstips 
+
 ## #0 - 向数组中插入项
 > 2015-12-29
 
