@@ -36,7 +36,10 @@ items.splice(items.length / 2, 0, 'hello');
 
 我尝试运行了这些测试在一系列的浏览器和操作系统中并且结果都很相近,我希望这些tips对你有用并且鼓励你去自己测试
 
-## #1 - AngularJs: `$digest` vs `$apply`
+## #1 - AngularJs: `$digest` 对比 `$apply`
 
 > 2016-01-01  by [@loverajoel](https://twitter.com/loverajoel)
 
+AngularJs最为人称道的一个特点就是双向数据绑定,AngularJs通过周期性的`$digest`来对比model和view之间的变化来实现它.想要知道框架的作用原理,就需要理解这个概念.
+
+当事件触发时,Angular会比较每个watcher.这就是所谓的`$digest`循环.
