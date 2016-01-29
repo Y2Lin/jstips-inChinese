@@ -46,4 +46,23 @@ AngularJs最为人称道的一个特点就是双向数据绑定,AngularJs通过�
 
 ### `$apply`
 
+这是显然是一个让你开始检测循环的方法.这意味着所有的**watcher**都被检查;整个程序开始进行`$diges loop`.这意味着这些**watcher**都被检查了.在内部,执行一个可选的回调函数后,调用了`$rootScope.$digest()`;
+
 ### `$digest`
+
+在这个例子中`$digest`方法开始对当前scope以及其子scope进行`$digest`遍历.需要注意的是,父级scope不会被检查和影响.
+
+### 建议
+- 在AngularJS以外,只有当DOM事件触发时才使用`$apply`或者`$digest`.
+- 传递一个函数表达式给 `$apply`,有一个容错机制,可以一次检测循环中整合多个变化.
+
+  ```javascript
+    $scope.$apply(() => {
+      $scope.tip = 'Javascript Tip';
+    });
+  ```
+
+- 如果你只需要更新当前的scope和它的子scope,使用`$digest`,并且阻止对整个程序的检测循环.对性能的提升是不言而喻的.
+
+- `$apply`是十分耗费机器资源的,尤其是当页面有较多的数据绑定时.
+- 如果你使用的是AngularJS 1.2x以上版本,使用`$evalAsync`,这是一个核心的方法,用来在本次或者下次检测循环中转化表达式.这会提高你的程序性能.
